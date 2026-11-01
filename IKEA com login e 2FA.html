@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IKEA Inspiration</title>
+<style>
+:root{--azul:#0051ba;--amarelo:#ffda1a;--bg:#fff;--fg:#111;--muted:#484848;--surface:#f5f5f5;--border:#dfdfdf;--erro:#e00751;--ok:#0a8a4a;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171a;--fg:#f2f2f2;--muted:#b5b5b5;--surface:#25282c;--border:#3a3d42;--erro:#ff6b8f;--ok:#4cd68a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15171a;--fg:#f2f2f2;--muted:#b5b5b5;--surface:#25282c;--border:#3a3d42;--erro:#ff6b8f;--ok:#4cd68a;color-scheme:dark}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Noto Sans",Arial,sans-serif}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--fg)}
+.top-banner{background:#111;color:#fff;font-size:12px;text-align:center;padding:8px 20px}
+.top-banner a{color:#fff;margin-left:5px}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:env(safe-area-inset-top,0px);z-index:100}
+.nav-left{display:flex;align-items:center}
+.logo{background:var(--azul);padding:12px 26px;border-radius:50%/100%;text-decoration:none;display:inline-block}
+.logo span{color:var(--amarelo);font-size:30px;font-weight:900;letter-spacing:-2px;display:block;transform:scaleY(1.3) scaleX(1.1)}
+.search{flex-grow:1;max-width:640px;margin:0 30px;position:relative}
+.search input{width:100%;padding:15px 24px 15px 50px;border-radius:50px;border:none;background:var(--surface);font-size:15px;color:var(--fg);outline:none}
+.search::before{content:"🔍";position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:15px}
+.nav-icons{display:flex;align-items:center;gap:22px;position:relative}
+.icon-btn{background:none;border:none;cursor:pointer;font-size:20px;position:relative;color:var(--fg);display:flex;align-items:center;gap:6px}
+.badge{position:absolute;top:-8px;right:-10px;background:var(--azul);color:#fff;font-size:11px;font-weight:700;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--azul);color:var(--amarelo);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.entrar{font-size:14px;font-weight:700}
+.menu{position:absolute;right:0;top:48px;background:var(--bg);border:1px solid var(--border);border-radius:12px;min-width:230px;padding:8px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.menu p{padding:10px 12px;font-size:13px;color:var(--muted);word-break:break-all}
+.menu p b{display:block;color:var(--fg);font-size:15px}
+.menu button{width:100%;text-align:left;background:none;border:none;color:var(--fg);padding:10px 12px;font-size:14px;font-weight:700;border-radius:8px;cursor:pointer}
+.menu button:hover{background:var(--surface)}
+.sub-nav{display:flex;padding:12px 40px;gap:25px;border-bottom:1px solid var(--border);font-size:14px;font-weight:700}
+.sub-nav a{color:var(--fg);text-decoration:none}.sub-nav a:hover{text-decoration:underline}
+main{max-width:1400px;margin:40px auto;padding:0 40px}
+.section-title{font-size:26px;font-weight:700;margin-bottom:24px;letter-spacing:-.5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:35px}
+.card{position:relative;display:flex;flex-direction:column}
+.img{height:260px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:96px}
+.info{padding:16px 52px 16px 0}
+.nome{font-size:16px;font-weight:700;text-transform:uppercase}
+.desc{font-size:14px;color:var(--muted);margin:4px 0 12px;line-height:1.4}
+.preco{display:flex;align-items:baseline}
+.preco i{font-style:normal;font-size:14px;font-weight:700;margin-right:2px}
+.preco b{font-size:28px;font-weight:800;letter-spacing:-1px}
+.preco small{font-size:16px;font-weight:700;align-self:flex-start;margin-top:2px}
+.add{position:absolute;bottom:16px;right:0;background:var(--azul);color:#fff;border:none;border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:16px}
+.add:hover{background:#003e8f}
+/* Modal */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:500}
+.overlay.on{display:flex}
+.modal{background:var(--bg);color:var(--fg);width:100%;max-width:440px;border-radius:16px;padding:32px;position:relative;max-height:92vh;overflow:auto}
+.x{position:absolute;top:14px;right:16px;background:none;border:none;font-size:24px;color:var(--fg);cursor:pointer}
+.modal h2{font-size:24px;letter-spacing:-.5px;margin-bottom:8px}
+.modal .sub{color:var(--muted);font-size:14px;line-height:1.5;margin-bottom:20px}
+label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
+.modal input{width:100%;padding:14px 16px;border:1px solid var(--muted);border-radius:8px;background:var(--bg);color:var(--fg);font-size:15px}
+.modal input:focus-visible,.btn:focus-visible,.link:focus-visible,.icon-btn:focus-visible,.add:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
+.code{text-align:center;font-size:28px!important;letter-spacing:12px;font-weight:700}
+.btn{width:100%;margin-top:22px;background:var(--azul);color:#fff;border:none;border-radius:50px;padding:15px;font-size:15px;font-weight:700;cursor:pointer}
+.btn:hover{background:#003e8f}.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.sec{background:none;color:var(--fg);border:1px solid var(--fg)}
+.link{background:none;border:none;color:var(--azul);font-size:14px;font-weight:700;cursor:pointer;text-decoration:underline;padding:4px 0}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .link{color:#6aa5ff}}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap;gap:6px}
+.msg{font-size:13px;margin-top:12px;min-height:18px;line-height:1.4}
+.msg.err{color:var(--erro)}.msg.ok{color:var(--ok)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#111;color:#fff;border-left:6px solid var(--amarelo);padding:14px 18px;border-radius:8px;font-size:14px;max-width:90vw;z-index:600;display:none;line-height:1.4}
+.toast.on{display:block}
+@media(max-width:768px){header{padding:12px 16px}.search{margin:0 10px}.sub-nav{display:none}main{padding:0 16px}.logo{padding:8px 16px}.logo span{font-size:22px}.entrar{display:none}.nav-icons{gap:16px}}
+</style>
+</head>
+<body>
+<div class="top-banner">Junte-se ao IKEA Family. Descontos e vantagens exclusivas para membros. <a href="#">Saber mais</a></div>
+
+<header>
+  <div class="nav-left"><a href="#" class="logo" aria-label="IKEA"><span>IKEA</span></a></div>
+  <div class="search"><input type="text" placeholder="O que procura hoje?" aria-label="Pesquisar"></div>
+  <div class="nav-icons">
+    <button class="icon-btn" id="perfil" aria-label="Conta"></button>
+    <button class="icon-btn" aria-label="Carrinho">🛒<span class="badge" id="cart">0</span></button>
+    <div class="menu" id="menu" hidden></div>
+  </div>
+</header>
+
+<nav class="sub-nav"><a href="#">Produtos</a><a href="#">Divisões</a><a href="#">Novidades</a><a href="#">Sustentabilidade</a><a href="#">Promoções</a></nav>
+
+<main>
+  <h2 class="section-title">Design democrático para a sua casa</h2>
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="titulo">
+  <div class="modal"><button class="x" id="fechar" aria-label="Fechar">×</button><div id="corpo"></div></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const mem={};
+const store={
+  get(k){try{const v=localStorage.getItem(k);if(v!==null)return JSON.parse(v)}catch(e){}return mem[k]??null},
+  set(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  del(k){delete mem[k];try{localStorage.removeItem(k)}catch(e){}}
+};
+async function hash(s){
+  try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('ikea:'+s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+  catch(e){return btoa(unescape(encodeURIComponent('ikea:'+s)))}
+}
+const novoCodigo=()=>String(crypto.getRandomValues(new Uint32Array(1))[0]%1000000).padStart(6,'0');
+const validaPass=p=>p.length>=8&&/[a-zA-Z]/.test(p)&&/\d/.test(p);
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- Produtos ---------- */
+const produtos=[
+ ['KALLAX','Estante, 77x147 cm','🗄️',34,99],['BILLY','Estante com portas de vidro','📚',89,0],
+ ['POÄNG','Poltrona, madeira de faia','🪑',99,0],['MALM','Estrutura de cama, 160x200 cm','🛏️',149,0],
+ ['LACK','Mesa de apoio, 55x55 cm','☕',9,99],['RANARP','Candeeiro de teto, cinzento','💡',39,99]];
+let nCart=0;
+$('#grid').innerHTML=produtos.map((p,i)=>`<div class="card"><div class="img" aria-hidden="true">${p[2]}</div><div class="info"><div class="nome">${p[0]}</div><div class="desc">${p[1]}</div><div class="preco"><i>€</i><b>${p[3]}</b><small>${String(p[4]).padStart(2,'0')}</small></div></div><button class="add" data-i="${i}" aria-label="Adicionar ${p[0]} ao carrinho">🛒</button></div>`).join('');
+$('#grid').addEventListener('click',e=>{if(e.target.closest('.add')){$('#cart').textContent=++nCart;aviso('Produto adicionado ao carrinho.')}});
+
+/* ---------- Estado de sessão ---------- */
+let sessao=store.get('ikea_sessao');
+function renderConta(){
+  const b=$('#perfil');
+  if(sessao){const u=(store.get('ikea_users')||{})[sessao];const nome=u?u.nome:sessao;b.innerHTML=`<span class="avatar">${esc(nome[0].toUpperCase())}</span>`;b.setAttribute('aria-label','Conta de '+nome);
+    $('#menu').innerHTML=`<p><b>Olá, ${esc(nome)}</b>${esc(sessao)}</p><button id="sair">Terminar sessão</button>`;
+  }else{b.innerHTML='👤 <span class="entrar">Entrar</span>';b.setAttribute('aria-label','Entrar na conta');$('#menu').hidden=true}
+}
+$('#perfil').onclick=()=>{if(sessao)$('#menu').hidden=!$('#menu').hidden;else abrir('login')};
+$('#menu').addEventListener('click',e=>{if(e.target.id==='sair')logout()});
+document.addEventListener('click',e=>{if(!e.target.closest('.nav-icons'))$('#menu').hidden=true});
+function logout(){sessao=null;store.del('ikea_sessao');$('#menu').hidden=true;renderConta();aviso('Sessão terminada com sucesso.')}
+
+/* ---------- Toast ---------- */
+let tt;function aviso(t,ms=6000){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('on'),ms)}
+
+/* ---------- Modal ---------- */
+let pend=null,falhas=0,bloqueio=0;
+const ov=$('#overlay');
+function abrir(v,m){ov.classList.add('on');vista(v,m)}
+function fechar(){ov.classList.remove('on');pend=null}
+$('#fechar').onclick=fechar;
+ov.addEventListener('mousedown',e=>{if(e.target===ov)fechar()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fechar()});
+const msg=(t,c)=>{const m=$('#msg');m.textContent=t;m.className='msg '+(c||'')};
+
+function vista(v,m){
+  const c=$('#corpo');
+  if(v==='login') c.innerHTML=`<h2 id="titulo">Entrar</h2><p class="sub">Aceda à sua conta IKEA Family.</p>
+   <form id="f" novalidate><label for="e">E-mail</label><input id="e" type="email" autocomplete="email" required>
+   <label for="p">Palavra-passe</label><input id="p" type="password" autocomplete="current-password" required>
+   <div class="msg ${m?'ok':''}" id="msg" aria-live="polite">${m||''}</div>
+   <button class="btn" type="submit">Entrar</button></form>
+   <div class="row"><button class="link" data-v="esqueci">Esqueci a palavra-passe</button><button class="link" data-v="registo">Criar conta</button></div>
+   <p class="sub" style="margin:16px 0 0;font-size:12px">Demonstração: demo@ikea.pt / Ikea1234</p>`;
+  if(v==='registo') c.innerHTML=`<h2 id="titulo">Criar conta</h2><p class="sub">Junte-se ao IKEA Family em poucos segundos.</p>
+   <form id="f" novalidate><label for="n">Nome</label><input id="n" autocomplete="name" required>
+   <label for="e">E-mail</label><input id="e" type="email" autocomplete="email" required>
+   <label for="p">Palavra-passe</label><input id="p" type="password" autocomplete="new-password" required>
+   <div class="sub" style="margin:6px 0 0;font-size:12px">Mínimo de 8 caracteres, com letras e números.</div>
+   <div class="msg" id="msg" aria-live="polite"></div><button class="btn" type="submit">Criar conta</button></form>
+   <div class="row"><button class="link" data-v="login">Já tenho conta</button></div>`;
+  if(v==='esqueci') c.innerHTML=`<h2 id="titulo">Recuperar palavra-passe</h2><p class="sub">Indique o e-mail da sua conta. Enviamos um código de 6 dígitos.</p>
+   <form id="f" novalidate><label for="e">E-mail</label><input id="e" type="email" autocomplete="email" required>
+   <div class="msg" id="msg" aria-live="polite"></div><button class="btn" type="submit">Enviar código</button></form>
+   <div class="row"><button class="link" data-v="login">Voltar a entrar</button></div>`;
+  if(v==='reset') c.innerHTML=`<h2 id="titulo">Definir nova palavra-passe</h2><p class="sub">Se existir uma conta com esse e-mail, enviámos um código. Introduza-o abaixo.</p>
+   <form id="f" novalidate><label for="k">Código de 6 dígitos</label><input class="code" id="k" inputmode="numeric" maxlength="6" autocomplete="one-time-code" required>
+   <label for="p">Nova palavra-passe</label><input id="p" type="password" autocomplete="new-password" required>
+   <div class="msg" id="msg" aria-live="polite"></div><button class="btn" type="submit">Guardar palavra-passe</button></form>
+   <div class="row"><button class="link" data-v="esqueci">Reenviar código</button><button class="link" data-v="login">Cancelar</button></div>`;
+  if(v==='2fa') c.innerHTML=`<h2 id="titulo">Verificação em dois passos</h2><p class="sub">Enviámos um código de 6 dígitos para ${esc(pend.email)}. Expira em 5 minutos.</p>
+   <form id="f" novalidate><label for="k">Código de verificação</label><input class="code" id="k" inputmode="numeric" maxlength="6" autocomplete="one-time-code" required>
+   <div class="msg" id="msg" aria-live="polite"></div><button class="btn" type="submit">Verificar e entrar</button></form>
+   <div class="row"><button class="link" id="reenviar">Reenviar código</button><button class="link" data-v="login">Cancelar</button></div>`;
+  const i=c.querySelector('input');if(i)setTimeout(()=>i.focus(),30);
+  const f=$('#f');if(f)f.onsubmit=ev=>{ev.preventDefault();submeter(v)};
+  const r=$('#reenviar');if(r)r.onclick=()=>{enviarCodigo();msg('Novo código enviado.','ok')};
+}
+$('#corpo').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(b){e.preventDefault();vista(b.dataset.v)}});
+
+function enviarCodigo(){
+  pend.code=novoCodigo();pend.exp=Date.now()+5*60*1000;pend.tries=0;
+  aviso(`Simulação de e-mail para ${pend.email}: o seu código é ${pend.code}`,20000);
+}
+
+async function submeter(v){
+  const val=id=>{const el=$('#'+id);return el?el.value.trim():''};
+  const users=store.get('ikea_users')||{};
+  if(v==='login'){
+    const e=val('e').toLowerCase(),p=$('#p').value;
+    if(Date.now()<bloqueio)return msg(`Demasiadas tentativas. Aguarde ${Math.ceil((bloqueio-Date.now())/1000)} s.`,'err');
+    if(!/^\S+@\S+\.\S+$/.test(e)||!p)return msg('Introduza um e-mail válido e a palavra-passe.','err');
+    const u=users[e];
+    if(!u||u.hash!==await hash(p)){
+      if(++falhas>=5){bloqueio=Date.now()+30000;falhas=0;return msg('Conta bloqueada durante 30 segundos por excesso de tentativas.','err')}
+      return msg('E-mail ou palavra-passe incorretos.','err');
+    }
+    falhas=0;pend={email:e,purpose:'login'};enviarCodigo();vista('2fa');
+  }
+  if(v==='registo'){
+    const n=val('n'),e=val('e').toLowerCase(),p=$('#p').value;
+    if(!n)return msg('Indique o seu nome.','err');
+    if(!/^\S+@\S+\.\S+$/.test(e))return msg('Indique um e-mail válido.','err');
+    if(!validaPass(p))return msg('A palavra-passe precisa de 8 caracteres, com letras e números.','err');
+    if(users[e])return msg('Já existe uma conta com este e-mail.','err');
+    users[e]={nome:n,hash:await hash(p)};store.set('ikea_users',users);
+    vista('login','Conta criada. Já pode entrar.');
+  }
+  if(v==='esqueci'){
+    const e=val('e').toLowerCase();
+    if(!/^\S+@\S+\.\S+$/.test(e))return msg('Indique um e-mail válido.','err');
+    pend={email:e,purpose:'reset',existe:!!users[e]};
+    if(users[e])enviarCodigo();else{pend.code=null;aviso('Simulação: se a conta existir, o código seria enviado agora.',8000)}
+    vista('reset');
+  }
+  if(v==='reset'){
+    const k=val('k'),p=$('#p').value;
+    if(!pend||!pend.code||Date.now()>pend.exp||k!==pend.code){
+      if(pend&&pend.code&&++pend.tries>=3){pend=null;vista('esqueci');return msg('Demasiadas tentativas. Peça um novo código.','err')}
+      return msg('Código inválido ou expirado.','err');
+    }
+    if(!validaPass(p))return msg('A palavra-passe precisa de 8 caracteres, com letras e números.','err');
+    users[pend.email].hash=await hash(p);store.set('ikea_users',users);pend=null;
+    vista('login','Palavra-passe alterada. Entre com a nova palavra-passe.');
+  }
+  if(v==='2fa'){
+    const k=val('k');
+    if(Date.now()>pend.exp)return msg('O código expirou. Peça um novo código.','err');
+    if(k!==pend.code){
+      if(++pend.tries>=3){pend=null;vista('login');return msg('Demasiadas tentativas. Volte a iniciar sessão.','err')}
+      return msg(`Código incorreto. Restam ${3-pend.tries} tentativa(s).`,'err');
+    }
+    sessao=pend.email;store.set('ikea_sessao',sessao);fechar();renderConta();
+    aviso(`Sessão iniciada. Bem-vindo, ${users[sessao].nome}!`);
+  }
+}
+
+/* ---------- Arranque ---------- */
+(async()=>{
+  const users=store.get('ikea_users')||{};
+  if(!users['demo@ikea.pt']){users['demo@ikea.pt']={nome:'Demo',hash:await hash('Ikea1234')};store.set('ikea_users',users)}
+  if(sessao&&!users[sessao]){sessao=null;store.del('ikea_sessao')}
+  renderConta();
+})();
+</script>
+</body>
+</html>
